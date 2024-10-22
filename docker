@@ -1,2 +1,32 @@
 docker中的容器和进行不同。
-  
+
+docker hub 去查看docker的官方价镜像文档（主要是environment信息）
+
+run docker 创建并运行docker容器（容器名，环境信息，端口，镜像名：版本）
+
+docker ps（查看所有运行中的容器，-a查看所有） / docker images查看镜像信息           查看状态
+
+docker rm（删除容器） / docker rmi（删除镜像）  运行中的镜像删除不了，可以先停止再删除，也可以用  -f参数，强行删除
+
+docker save/ docker load 对dokcer镜像进行打包和解包，用不明白可以使用--help查看
+
+docker run/stop 容器名  启动或停止docker容器
+
+docker exec -it 镜像名  进入镜像，直接对镜像文件进行操作
+
+
+
+
+
+任务：
+
+需求:
+在DockerHub中搜索Nginx镜像,查看镜像的名称
+拉取Nginx镜像
+查看本地镜像列表
+创建并运行Nginx容器
+查看容器
+停止容器
+再次启动容器
+进入Nginx容器
+删除容器
