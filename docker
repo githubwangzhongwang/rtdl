@@ -32,6 +32,7 @@ docker volumes inspect 挂载名  查看挂载的详细信息
 
 挂载的问题只能在容器创建的时候进行挂载，容器创建之后，只能删除文件之后再进行挂载
 
+docker exec -it (容器名) bash（通过bash命令行打开，可以试试其他的）  进入容器的bash命令行，可以通过exit退出
 
 
 
