@@ -53,9 +53,14 @@ docker exec -it (容器名) bash（通过bash命令行打开，可以试试其�
 
 昨天的问题：拉区远端的镜像时，报错，今天查看配置的阿里云镜像有没有成功，文件有没有创建，配置有没有写入文件
 
+问题定位：从报错信息上面看，访问的还是docker hub的原版地址，所以觉得是配置的镜像有没有成功，查看文件，成功写入了
 
-
-
+解决方式：（不一定能行）
+1. /etc/resolv.conf  进入配置文件
+2. 配置谷歌的dns域名解析地址
+    nameserver 8.8.4.4
+    nameserver localdomain
+3. systemctl restart docker 重启docker
 
 
 
