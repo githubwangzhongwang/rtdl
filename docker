@@ -1,3 +1,14 @@
+docker安装： docker官网--dicker engine---按照步骤来
+
+坑点：配置docker的yum源之后，会发现安装docker失败，是因为官网停止维护centos7了，需要换yum源
+
+docker换yum源怎么操作：
+
+
+
+
+
+
 docker中的容器和镜像不同。
 
 docker hub 去查看docker的官方价镜像文档（主要是environment信息）
