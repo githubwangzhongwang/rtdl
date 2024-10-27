@@ -1,4 +1,4 @@
-docker中的容器和进行不同。
+docker中的容器和镜像不同。
 
 docker hub 去查看docker的官方价镜像文档（主要是environment信息）
 
