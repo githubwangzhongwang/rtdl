@@ -1,0 +1,31 @@
+一. 上传文件：
+  在存储库中upload file 就可以
+
+
+二. 通过git将文件夹传到github上
+
+1. 安装git
+
+2. 打开git bash，进入目录
+
+3.生成密钥
+  ssh-keygen -t rsa -C “邮箱”
+  在user目录下的.ssh，类似于C:\Users\yWX1334877\.ssh
+  记事本打开id_rsa.pub
+
+4. github设置
+  点头像--》settings--》SSH key--》new key--》把生成的密钥粘贴进去
+
+5. 创建连接
+  新建github的存储库
+  点击code，复制https的链接
+  打开要上传的文件件，右键git bash
+
+  命令执行
+  git init                                                   #初始化
+  git add .                                                  #将当前目录添加到git暂存区，方便下次一起提交
+  git commit -m "你的说明注释"                                #添加注释
+  git remote add origin "刚才复制的git账户的仓库http地址"      #本地和远程建立关联
+  git push -u origin master                                  #将本地代码推到远程，第一次提交会让输入密码
+  git branch master                                          #git上创建的代码仓，默认分支是main，我希望提交的位置是master上，命令的作用是创建master分支，如果分支存在，则切换到该分支上
+
