@@ -35,3 +35,4 @@ session.requests(**case['requests'])，  case中的是获取到的yaml原数据�
 
 json传参时，如何进行sql注入
 
+python如何解决断言的问题
