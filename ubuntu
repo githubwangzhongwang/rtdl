@@ -2,10 +2,43 @@
 
 更新软件 apt
 
-下载常用的软件，如vim，netplan等
+下载常用的软件，如vim，netplan，net-tools等
 
-配置静态ip
+切换到root（sudo -i）
 
-开启ssh服务
+设置root密码（passwd root）
 
-关闭防火墙
+配置静态ip（/etc）
+
+我用的是net模式的，桥接模式的静态ip如何配置没有记录
+
+1.查看网络出口（打开具体那块网卡），ip link show
+
+2.打开文件 /etc/netplan/sudo vi 50-cloud-init.yaml （centos是/etc/sysconfig/network-scripts/ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth33.bak）
+
+3.     
+        network:
+    renderer: networkd
+    ethernets:
+        ens33: # 替换为你的网络接口名称
+            dhcp4: false # 关闭 DHCP
+            dhcp6: false # 关闭 DHCP
+            addresses: [192.168.100.122/24] # 静态 IP 地址和子网掩码
+            routes:
+              - to: default
+                via: 192.168.100.1 # 网关地址
+            nameservers:
+                addresses: [192.168.100.1] # DNS 服务器地址
+                search: []
+    version: 2
+跟着上面配置就可以（如果忘了网关和其他的配什么，可以去看之前配置的centos7的配置文件）
+
+4.应用修改，类似于source吧， sudo netplan apply
+
+5.完成，ping 百度进行查看
+
+
+
+开启ssh服务（要进行安装opensssh-server，不安装可以连接别人，别人不能连接ubuntu）
+
+关闭防火墙（为了打开ssh的远程登陆，也可以之开启对应服务器的端口，ufw allow 22/tcp ）
