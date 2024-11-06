@@ -106,7 +106,7 @@ postman
 
 2. 如何在字符串中添加变量，也就是test中自定义输出显示，我想将一个变量的值添加上去，如何实现
 
-
+3. 如何解决postman通过网页上传文件，也就是Content-Type: multipart/form-data 的格式，如何通过postmna来模拟出来
 
 
 
