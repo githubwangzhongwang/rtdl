@@ -107,10 +107,30 @@ postman
 2. 如何在字符串中添加变量，也就是test中自定义输出显示，我想将一个变量的值添加上去，如何实现
 
 3. 如何解决postman通过网页上传文件，也就是Content-Type: multipart/form-data 的格式，如何通过postmna来模拟出来
+已解决：
+      （1）在请求头中有这样的一个字段：
+            Content-Type: multipart/form-data; boundary=----WebKitFormBoundary5CXksJpeFOE7H8fa
+            用于定义一个分隔符的，在请求的body中，每一段被该字段分隔出一段一段的，其中每一段都是一个独立的参数
+      （2）body中的请求，如下所示：
+            ------WebKitFormBoundary5CXksJpeFOE7H8fa
+            Content-Disposition: form-data; name="chunkNumber"
 
+            1
+            ------WebKitFormBoundary5CXksJpeFOE7H8fa
+            Content-Disposition: form-data; name="chunkSize"
 
+            1073741824
+            其中上面定义的是两个参数的key和value，name的值作为key，换行符隔出来的值‘1’和‘1073741824’为value。
+      （3）将body中所有的值，填入postman中的form-data，选择类型为text
 
+      （4）上传文件：
+            ------WebKitFormBoundary5CXksJpeFOE7H8fa
+            Content-Disposition: form-data; name="file_obj"; filename="dpsapp.tar.zip"
+            Content-Type: application/x-zip-compressed
 
+            上面是原始请求的内容，下面放的是文件的数据，在postman中，选择文件，点击select files，name的值为key
+
+      （5）发送请求
 
 
 
