@@ -1,0 +1,20 @@
+
+
+自动化框架结构，目录：
+
+
+
+注意点：
+（1）因为这边都是通过json传参的，格式如下所示：
+  jsondata = {"limit":10,"order":"desc","page":1,"querydict":{"create_by":"王"}}
+  在request.post(json=jsondata)，通过这种方式进行传递
+（2）
+
+
+
+
+问题：
+（1）如何封装一个python文件，可以在另一个文件中import导入
+
+（2）一个查询的请求，通过requests发送不出去了，是因为被ssl拦截，通过verify=False的方式不能解决，报错中提示的urllib3。看看有没有别的方式解决
+
