@@ -24,3 +24,6 @@
 
 解决： （1）通过verify=False可以解决问题，只是会报一个warning，其实请求已经发送了的
        （2）相应要使用 .text 来处理一下，否则内容为空，错认为请求未发送
+       （3）屏蔽warning信息：
+            1. requests.packages.urllib3.disable_warnings()                             #代码写在调用请求之前
+            2. urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)      #也可以关闭掉ssl的提示，但是需要先导入urllib3的包
