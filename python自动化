@@ -13,30 +13,26 @@
 
 文件上传：
     1.python调用文件发送接口（非multipart/form-data）
-              #header
-              header = {
-                          'key1': value1,
-              						# 这是巨坑！一定不要自己填写Content-Type，requests会完成
-                					#'Content-Type':'multipart/form-data',
-                      }
-              
-              #普通字段
-              data = {
-                          'key2': value2,
-                      }
-              
-              #文件
-              #files是key 
-              files=[
-              	('files',('file',open('targetFile.txt','rb'),'application/octet-stream'))            #重点位置
-              ]
-              
-              r = requests.request(method='post', url=url, headers=headers, files=files, data=data)
-              res = json.loads(r.text)
+        file = {                                          #上传文件请求body中的最后，关于文件的值，放在这里
+            "file_obj": open('test.zip','rb'),
+            "Content-Type":"application/x-zip-compressed",
+            "Content-Disposition":"form-data",
+            "filename":"test.zip"
+        
+        }
+        
+        data = {                                          #请求body中，除了文件外的其他的所有值，填写到data中，如果没有其他值，可以不用写
+            "sample_name": "37571.pcap",
+            "owner_group": "/data/atp/pcap/custom/test",
+            "type": "1",
+            "sample_file_path": "",
+            "description_file_path": "",
+            # "description_file":""
+        }
+        
+        response = requests.post(url=url, files=file, headers=headers, verify=False, data=data).text
     
     总结：headers中不要自己填写content-tpye，注意重点位置的代码，就可以了
-
-  2.Python的requests发送文件（multipart/form-data）
 
 
 
