@@ -11,6 +11,38 @@
 （2）
 
 
+文件上传：
+    1.python调用文件发送接口（非multipart/form-data）
+              #header
+              header = {
+                          'key1': value1,
+              						# 这是巨坑！一定不要自己填写Content-Type，requests会完成
+                					#'Content-Type':'multipart/form-data',
+                      }
+              
+              #普通字段
+              data = {
+                          'key2': value2,
+                      }
+              
+              #文件
+              #files是key 
+              files=[
+              	('files',('file',open('targetFile.txt','rb'),'application/octet-stream'))            #重点位置
+              ]
+              
+              r = requests.request(method='post', url=url, headers=headers, files=files, data=data)
+              res = json.loads(r.text)
+    
+    总结：headers中不要自己填写content-tpye，注意重点位置的代码，就可以了
+
+  2.Python的requests发送文件（multipart/form-data）
+
+
+
+
+
+
 
 
 问题：
@@ -27,3 +59,6 @@
        （3）屏蔽warning信息：
             1. requests.packages.urllib3.disable_warnings()                             #代码写在调用请求之前
             2. urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)      #也可以关闭掉ssl的提示，但是需要先导入urllib3的包
+
+
+
