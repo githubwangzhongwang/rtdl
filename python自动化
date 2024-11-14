@@ -35,6 +35,7 @@
     总结：headers中不要自己填写content-tpye，注意重点位置的代码，就可以了
 
 
+json文件取值，通过 .get("参数名")
 
 
 
