@@ -37,6 +37,9 @@
 
 json文件取值，通过 .get("参数名")
 
+（3）python获取当前执行文件所在的绝对路径
+  import os
+  path_xx = os.path.dirname(__file__)
 
 
 
