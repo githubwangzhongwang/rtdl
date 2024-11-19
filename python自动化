@@ -57,6 +57,8 @@ json文件取值，通过 .get("参数名")
             1. requests.packages.urllib3.disable_warnings()                             #代码写在调用请求之前
             2. urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)      #也可以关闭掉ssl的提示，但是需要先导入urllib3的包
 
+（）
+
 
 
 pytest问题
@@ -64,7 +66,9 @@ pytest问题
 
 pytest的整体框架是啥样的，每个文件是干嘛的，每个文件中的构造是啥样的，
 
-待解决问题，运行时，代码自动跑的是pytest的格式，在类旁边的运行按钮，点不了是因为啥。
+待解决问题，运行时，代码自动跑的是pytest的格式。
 保证文件名字不是 *_test 或者  test_* 的就不会默认执行pytst了
 
 json数据中有的 null 时，会报错，可以通过None替换null，可以达到同样的效果
+
+视频中，每个类，类下的每个方法，左侧都有一个运行按钮（和main函数的左侧一样），但是我的类和类方法左侧没有按钮，这样，运行时也只能全部运行代码，不能选择在方法上运行和运行整个类
