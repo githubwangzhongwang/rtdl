@@ -88,7 +88,8 @@ allure
     python_files = test*.py
     python_classes = Test*
     python_functions=test*
-运行  allure server report
+3.运行测试文件 pytest，生成报告的json文件存放在 report文件中，
+4.运行  allure server report ，通过report中的文件，生成报告
 
 pytest-html
 1.运行命令  pytest case（用例文件） --html=/case/report.html（设置报告的生成位置和文件名） --self-contained-html（取消生成的报错的资源文件，我没找到不用的话生成啥文件了）
