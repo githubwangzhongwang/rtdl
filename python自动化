@@ -157,3 +157,7 @@ pytest-html
 （6）cmd中运行pytest报错：不识别pytest命令
 python -m pytest  这样就可以了
 
+（7）pip安装第三方库
+-i 参数配置镜像地址
+设置pip的默认镜像地址   pip config set global.index-url http://mirrors.tools.huawei.com/pypi/simple/
+有时候直接使用pip或者是pytest报错的，可以使用python -m pip/pytest
