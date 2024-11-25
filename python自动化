@@ -46,6 +46,23 @@ pytest case/test_1.py（选择执行文件）::Test_a（选择执行类）::test
 abc = [pytest.mark.xx, pytest.mark.smoke]    #同时给该文件标记了 xxx和smoke，-m xx和 -m smoke 都可以调用的该文件
 
 
+pytest生成报告：
+（1）allure
+1.pytest.ini 文件
+      [pytest]
+      addopts = -s --alluredir report
+      testpaths = ./script
+      python_files = test*.py
+      python_classes = Test*
+      python_functions=test*
+2.运行pytest，执行后生成的文件会存在于（哪里我也不知道）中
+3.运行allure，会将上面的执行过生成html的报告
+  allure server report
+
+（2）pytest-html
+1.运行命令  pytest case（用例文件） --html=/case/report.html（设置报告的生成位置和文件名） --self-contained-html（取消生成的报错的资源文件，我没找到不用的话生成啥文件了）
+
+
 
 注意点：
 （1）因为这边都是通过json传参的，格式如下所示：
