@@ -161,3 +161,7 @@ python -m pytest  这样就可以了
 -i 参数配置镜像地址
 设置pip的默认镜像地址   pip config set global.index-url http://mirrors.tools.huawei.com/pypi/simple/
 有时候直接使用pip或者是pytest报错的，可以使用python -m pip/pytest
+
+（8）requests用于做接口测试（发请求，判断相应），selenuim做web测试（模拟用户端的ui）
+
+
