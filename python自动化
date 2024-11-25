@@ -4,6 +4,49 @@
 
 
 
+
+
+
+pytest初始化：
+使用 setup_xx(): 和 teardown_(): 其中（）填写method，class，modul。set_up会在函数执行前执行，teardown会在函数执行完之后执行
+（1）方法的初始化清除：
+setup_method():
+  pass
+teardown_mothod():
+  pass
+（2）类的初始化清除：
+@classmethod
+setup_class(cls):
+  pass
+teardown_class(cls):
+  pass
+（3）模块的初始化清除：
+def setup_module():
+  pass
+def teardown_module():
+  pass
+（4）整个目录的初始化清除：
+创建conftest.py文件在目录下
+import pytest
+@pytest.fixture(scope='package', autouse=True)      # autouse=True 自动执行，如果不设置的话，需要在用例中声明使用conftest。
+def set_emptyEnv():
+    print('目录初始化开始')
+    yield
+    print("目录初始化结束")
+
+
+pytest的选择执行：
+（1）在pytest的命令中选择执文件，模块，类，方法
+pytest case/test_1.py（选择执行文件）::Test_a（选择执行类）::test_1（选择执行方法）
+（2）对需要执行的、类、方法进行标记
+@pytest.mark.smoke（标记的名称）
+调用的时候， pytet -m smoke
+（3）给整个文件创建标记：
+新建全局变量，将标记赋值给变量
+abc = [pytest.mark.xx, pytest.mark.smoke]    #同时给该文件标记了 xxx和smoke，-m xx和 -m smoke 都可以调用的该文件
+
+
+
 注意点：
 （1）因为这边都是通过json传参的，格式如下所示：
   jsondata = {"limit":10,"order":"desc","page":1,"querydict":{"create_by":"王"}}
