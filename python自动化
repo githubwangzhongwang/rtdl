@@ -1,7 +1,12 @@
 
 
 自动化框架结构，目录：
-
+api
+script
+report
+data
+conftest.py
+pytest.ini
 
 
 
