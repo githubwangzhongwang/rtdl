@@ -170,6 +170,5 @@ python -m pytest  这样就可以了
 （8）requests用于做接口测试（发请求，判断相应），selenuim做web测试（模拟用户端的ui）
 
 （9）如果正常可以运行，但是在terimal中不可运行的，报错并不是 不识别pytest命令的
-在terimal中使用python -m pytest ，执行命令即可。
-
+ 没解决
 （10）
