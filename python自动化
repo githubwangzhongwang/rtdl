@@ -75,6 +75,20 @@ pytest生成报告：
   在request.post(json=jsondata)，通过这种方式进行传递
 （2）
 
+参数处理：
+
+``python
+import pytest
+
+@pytest.mark.parametrize("num1, num2, result", [(1, 2, 3), (4, 5, 9), (7, 8, 15)])
+def test_addition(num1, num2, result):
+    assert num1 + num2 == result
+```
+按这个格式调用，测试用例的数量就是用例的个数
+
+
+
+
 
 文件上传：
     1.python调用文件发送接口（非multipart/form-data）
