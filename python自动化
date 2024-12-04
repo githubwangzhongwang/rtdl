@@ -55,8 +55,8 @@ pytest生成报告：
 （1）allure
 1.pytest.ini 文件
       [pytest]
-      addopts = -s --alluredir report
-      testpaths = ./script
+      addopts = -s --alluredir report    # 其中最后面的report表示生成报告的位置和文件名，如果不存在，会新创建一个，这里的./不会表示当前文件的所在位置，而是运行时环境所在的位置。根据具体的文件位置填写
+      testpaths = ./script               #这个表示被扫描的文件夹，其中./表示当前运行环境的位置，所以如果项目在一个文件夹下，可以这里不动，直接pytest TEST（文件夹名字）
       python_files = test*.py
       python_classes = Test*
       python_functions=test*
