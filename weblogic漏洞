@@ -1,0 +1,16 @@
+weblogic是oracle出品的java中间件
+
+端口：7001
+默认登录地址：http://your-ip:7001/console
+
+漏洞总结：
+
+1、任意文件上传漏洞（CVE-2018-2894）
+weblogic管理端未授权两个页面存在任意上传jsp文件漏洞，可以实现提权
+
+
+
+2、xmldecoder反序列化漏洞（CVE-2017-10271）
+weblogic的wls组件security组件，对外提供webserver服务，其中使用了xmlDecode来解析用户传入xml数据的，解析的过程中，通过反序列化漏洞，可以实现任意命令执行
+
+
