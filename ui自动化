@@ -4,8 +4,8 @@ UI自动化
 （1）启动浏览器是时候，报错，需要安全对应浏览器的driver。
     比如：chrome浏览器的下载地址：https://googlechromelabs.github.io/chrome-for-testing/#canary        # 主要版本，版本不正确会有很多奇怪的错误
     安装对应浏览器的版本就可以，目前只能找到最新的版本，可以通过更新浏览器实现版本对应吧
-（2）将文件一定到python的保存目录中
-
+（2）将文件移动到python的保存目录中，或者写在环境变量中
+解压下载的文件，将其中的exe文件存放到python的目录下面，或者在环境变量-Path中添加exe文件地址
 
 
 
