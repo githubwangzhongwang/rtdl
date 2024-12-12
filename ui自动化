@@ -21,12 +21,22 @@ UI自动化
 
 功能
 （1）driver.maximize_window()    #最大化窗口
-（2）driver.implicitly_wait(10)        #隐形等待，可能不叫这个名字，用来等待页面相应的，如果页面过大的，可以等待加载页面，网络加载的时间
+（2）driver.implicitly_wait(10)        #隐式等待，可能不叫这个名字，用来等待页面相应的，如果页面过大的，可以等待加载页面，网络加载的时间
 （3）time.sleep(10)        #可以使用sleep函数，直接设置整体页面的等待时间
 （4）通过xpath进行定位，在浏览器的f12中，选中点击或输入的js代码，右键点击复制，选择复制xpath
     driver.find_element(By.XPATH, "//*[@id='username']").send_keys('yWX1334877')    #在xpath指定的位置进行输入
     driver.find_element(By.XPATH, "//*[@id='w3-login-button']").click()             #在xpath指定的位置进行点击
-    
+（5）text=driver.find_element(By.XPATH, "//*[@id='w3-login-button']").text()        #取值
+（6）driver.close()        #关闭浏览器的当前页面，如果是在一次用例中，打开一个页面后，又打开了另一个页面的这种，关闭的会是最开始打开的那个页面
+（7）driver.quit()         #关闭整个浏览器
+
+
+
+
+特性：
+（7）可以通过setup_class()，这种pytest的初始化方式，将浏览器的打开和配置工作前置，这样直接在下面引用self.driver即可，但要注意的是，selenium本身设置的浏览器在执行完之后，会自动关闭，如果前置话操作的话，
+    自动关闭功能会失效，需要在填写 teardown_class() 着这里使用quit（），这样也可以实现关闭浏览器
+
 
 
 
