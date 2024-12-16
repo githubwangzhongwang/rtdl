@@ -73,5 +73,8 @@ UI自动化
 （4）弹窗获取功能实现不了，有可能是平台弹窗的方式不是alert或者confirm的，而是通过前端js活css实现的（乱猜的），总之实现不了
 
 （5）浏览器多个用例之间，要打开多个浏览器，如何只打开一个浏览器
-    配置conftest.py文件，浏览器的初始化放在这里，然后yeild，最后退出quit（）退出浏览器
-
+    配置conftest.py文件，浏览器的初始化放在这里，然后yield，最后退出quit（）退出浏览器，conftest文件放置在根目录下，调用的时候无需导入
+    @python.fixturn(scope='class')        # 其中scope用来指定初始化执行的位置，class为每个类执行之前，会执行一次conftest.py文件
+    driver.get()                          # 这里（yield之前的）为前置操作
+    yield driver                          # 这里相当于一个return的功能，后面跟driver，可以直接在文件中调用driver
+    dirver.quit()                         # 这里（yield之后的）为后置操作
