@@ -35,7 +35,17 @@ UI自动化
     ActionChains(driver).move_to_element(mouse).perform()       # 关键位置，设置鼠标移动后悬停在该位置，这里也可以设置个隐式等待时间
     driver.find_element(By.LINK_TEXT, '翻译').click()            #正常点击该位置
 
-（）driver.close()        #关闭浏览器的当前页面，如果是在一次用例中，打开一个页面后，又打开了另一个页面的这种，关闭的会是最开始打开的那个页面
+（8）实现回车功能，有的地方的输入框，输入完检索内容后，没有点击查询的位置，只能通过回车进行确认执行，这种的可以使用该功能
+    driver.find_element(By.XPATH, '//*[@id="rc_select_0"]').send_keys('web')         #这里是在功能框中进行输入，不可以在后面再添加 .send.keys(),也就是这两步不能写成一步执行，否则会报错
+    driver.find_element(By.XPATH, '//*[@id="rc_select_0"]').send_keys(Keys.ENTER)    #通过发送Keys.ENTER，进行回车，注意这里的Keys需要导入库
+
+（9）标签页切换，当打开浏览器之后，在其中再打开一个页面，如果对第二个页面进行操作，发现会报错，应为这里操作指向的还是第一个页面，需要手动切换到第二个页签中
+    handles = driver.window_handles        #这里得到的handles是一个列表，通过handle[0]这种的去取页签的值
+    driver.switch_to.window(handles[1])    #这样可以直接切换到指定的页签中。切换后，所有的操作就是在对这个新的页签进行操作了
+
+（10）
+
+（）driver.close()        #关闭浏览器的当前页面，如果是在一次用例中，打开一个页面后，又打开了另一个页面的这种，关闭的会是最开始打开的那个页面（问题解决，这里切换窗口句柄就可以）
 （）driver.quit()         #关闭整个浏览器
 
 
