@@ -8,6 +8,7 @@
 清华镜像地址：
 https://mirrors.tuna.tsinghua.edu.cn/
 
+虚拟机地址池：
 服务器 ubuntu  192.168.1.111
 
 攻击机 kali    192.168.1.121
@@ -15,3 +16,5 @@ https://mirrors.tuna.tsinghua.edu.cn/
 靶机 centos7 win2003  192.168.1.131 135
 
 常用系统  win10  192.168.1.141
+
+docker搞好
