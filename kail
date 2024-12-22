@@ -1,0 +1,23 @@
+kali安装
+
+1.直接下载官方的压缩包7z，解压后直接打开即可
+
+2.配置nat静态ip
+  （1）vm中 ----编辑-----网络编辑器----选择nat（VMnet8）网卡，点击更改配置---选择VMnet8，配置ip和掩码，勾选nat模式，点击NAT设置----网关配成.2的
+
+  （2）本机 ----点击网络设置----高级网络设置----VMnet8网卡----编辑更多适配器选项---配置ipv4----ip（.1）,网关（.2）,掩码（8888）
+
+  （3）kali ----编辑文件/etc/network/interface ，添加内容：
+      auto eth0
+      iface eth0 inet static
+      address 192.168.10.101  # 静态IP地址，确保该地址在子网范围内且未被其他设备使用
+      netmask 255.255.255.0  # 子网掩码
+      gateway 192.168.10.2   # 网关地址，与NAT设置中的网关IP相同
+    编辑文件/etc/resolv.conf，添加内容
+      nameserver 192.168.10.2  # 可以使用NAT网关作为DNS服务器，或者指定其他可靠的DNS服务器
+      nameserver 8.8.8.8      # 谷歌公共DNS服务器
+      nameserver 114.114.114.114  # 国内常用的公共DNS服务器
+    重启网路服务      service networking restart
+问题：如果上面的服务存在启动不了的情况，查看上面文本中的内容是否填写正确即可
+
+3.
