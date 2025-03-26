@@ -1,1 +1,47 @@
+前期准备：
+1、 安装selenium-wire库，监控流量还需要依赖库，安装好运行后会有提示，按提示安装即可
 
+
+使用：
+
+导入：
+from seleniumwire import webdriver    # 安装完的库名是这个，和安装名不一样
+from selenium.webdriver.common.by import By    # 这里通过xpath取值，还需要导入selenium的By，seleniumwire没有这个By
+
+配置：
+      self.login_url = "https://kweuat.huawei.com/secwar/#/home"  # uat
+      chrome_options = webdriver.ChromeOptions()          # 这里的配置方式和selenium不一样，大差不差
+      chrome_options.binary_location = 'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe' # 安装的webdriver位置
+      driver = webdriver.Chrome(options=chrome_options)
+      return driver
+
+请求监控：
+        for request in driver.requests:
+            if request.response:
+                print(
+                    request.url,    # 这里还可以是其他关于请求的信息
+                    request.response.status_code,
+                    request.response.headers['Content-Type']
+                )
+
+请求处理：
+        pattern = r'^2\d{2}$'
+
+        # 返回所有状态码不为2xx的列表
+        # results = []
+        # for request in requests:
+        #     if request.response:
+        #         if not bool(re.match(pattern, str(request.response.status_code))):
+        #             # current_file_path = os.path.abspath(__file__)
+        #             result = [request.url, request.response.status_code]
+        #             results.append(result)
+        # return results
+
+        # 直接打印所有状态码不为2xx的请求
+        for request in requests:
+            if request.response:
+                if not bool(re.match(pattern, str(request.response.status_code))):
+                    print(
+                        request.url,
+                        request.response.status_code,
+                    )
