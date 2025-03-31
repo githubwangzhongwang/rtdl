@@ -45,3 +45,6 @@ from selenium.webdriver.common.by import By    # 这里通过xpath取值，还�
                         request.url,
                         request.response.status_code,
                     )
+
+使用方式：
+      https://www.cnblogs.com/yoyo1216/p/17143338.html
