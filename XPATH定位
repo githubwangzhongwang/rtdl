@@ -1,3 +1,4 @@
+
 xpath学习：https://www.w3school.com.cn/xpath/index.asp
 
 
@@ -37,3 +38,9 @@ div标签聚焦不到（本来以为是这里的问题，其实不是）
 通过driver.switch_to.frame("id/name")切换iframe，在点就可以点到了
 手写xpath，如果有多个相同的标签（只有随机数不同，其他标志相同），可以通过绝对路径+手写xpath方式取到（已经成功）
 
+
+
+定位方式：
+1、视觉方式，存在相同名字的按钮，可以通过  绝对路径+视觉xpath ，进行区分
+  如果无法区分开，可以通过取所有的符合项：
+  driver.find_elements(By.XPATH, '//*[text()="取消"]/..')[1].click()
