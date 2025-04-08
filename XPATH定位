@@ -44,3 +44,6 @@ div标签聚焦不到（本来以为是这里的问题，其实不是）
 1、视觉方式，存在相同名字的按钮，可以通过  绝对路径+视觉xpath ，进行区分
   如果无法区分开，可以通过取所有的符合项：
   driver.find_elements(By.XPATH, '//*[text()="取消"]/..')[1].click()
+2、定位输入元素，这两个一样
+//*[text()="资产创建账号"]/following::input[2]
+//*[text()="资产创建账号"]/following::*[name()="input"][2]
