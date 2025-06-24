@@ -22,4 +22,6 @@ github下载CVE-2021-3156利用的代码（c的），放到服务器上，编译
   linux中一切皆文件，cat，find等命令也是文件
   通过where cat，查询文件，修改文件权限即可（被加s权限的文件，会标红警告，提权完之后应该将权限改回去）
 利用方式：
-find -prim -u=s
+find -prim -u=s    查找所有拥有s权限的命令，查看是否有利用方式，比如：
+cat：cat passwd和shadow文件，对shadow文件进行解密（好处是不需要建立连接就可以爆破）
+find：
