@@ -15,6 +15,13 @@ github下载CVE-2021-3156利用的代码（c的），放到服务器上，编译
 
 
 （2）sudoer提权
+原理：
+linux上有些用户有权限使用sudo执行命令
+利用方式：
+  sudo -l 查看当前用户可以通过sudo执行哪些命令
+  visudo（修改sudo文件，sudo文件控制有哪些用户，可以通过sudo执行哪些命令）
+    username（用户名） ALL（ALL：ALL） NOPASSWD：/user/bin/firewall -cmd    表示username用户在任意机器上，以任意身份执行firewall命令
+  通过上面方式，产看有无命令配置错误，可以以root身份，执行有风险的命令，如cat、find
 
 3、suid提权：
 原理：
